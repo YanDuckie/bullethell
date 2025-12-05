@@ -2,10 +2,13 @@
 using Unity.VisualScripting;
 using UnityEditor.Callbacks;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
 
+    [SerializeField]
+    PlayerInput playerInput ;
     public Rigidbody rb ;
 
 
@@ -18,21 +21,13 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-       if (Input.GetKey(KeyCode.W)) 
-        {
-            rb.AddForce(0,0,250 * Time.deltaTime, ForceMode.VelocityChange);
-        }
-      if (Input.GetKey(KeyCode.S)) 
-        {
-            rb.AddForce(0,0,-250 * Time.deltaTime, ForceMode.VelocityChange);
-        }
-     if (Input.GetKey(KeyCode.D)) 
-        {
-            rb.AddForce(250 * Time.deltaTime,0,0, ForceMode.VelocityChange);
-        }
-     if (Input.GetKey(KeyCode.A)) 
-        {
-            rb.AddForce(-250 * Time.deltaTime,0,0, ForceMode.VelocityChange);
-        }
+       var horizontal=playerInput.actions["Horizontal"].ReadValue<float>() ;
+       var vertical=playerInput.actions["Vertical"].ReadValue<float>() ;
+            rb.AddForce(0,0,200 * vertical * Time.deltaTime, ForceMode.VelocityChange);
+        
+
+   
+            rb.AddForce(200 * horizontal * Time.deltaTime,0,0, ForceMode.VelocityChange);
+        
     }
 }
