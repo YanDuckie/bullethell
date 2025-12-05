@@ -14,7 +14,7 @@ public class Collider : MonoBehaviour
         {
             Debug.Log("TOUCHED") ;
            
-
+ 
             FindAnyObjectByType<GameManager>().Restart();
         }
         else if (collision.gameObject.tag == "WinPad")
